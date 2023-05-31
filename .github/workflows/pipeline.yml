@@ -43,6 +43,15 @@ jobs:
         run: npm run build
       - name: test
         run: npm run test
+      - name: Test Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+            severity: info
+            details: Test Succeeded!!!
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+            avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
+
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
