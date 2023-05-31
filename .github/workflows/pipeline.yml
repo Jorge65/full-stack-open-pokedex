@@ -57,18 +57,18 @@ jobs:
           text: Succesfull tests
           severity: info
           description: Unit and E2E tests
-          details: Tests succeeded !!!
+          details: Tests succeeded!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
 
       - name: Tests failed
         uses: rjstone/discord-webhook-notify@v1
-        if: failure()
+        if: success()
         with:
           text: Failed tests
           severity: error
           description: Unit and E2E tests
-          details: Tests failed before deployment
+          details: ${{ github.event.commits.message }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
     
@@ -80,21 +80,21 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1
         if: success()
         with:
-          text: Succesfull deployment!
+          text: New version deployed!
           severity: info
           description: Deployment to Render
-          details: Deployment was successfull
+          details: https://pokedex-0ugg.onrender.com/ by Jorge65
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
 
       - name: Deployment failure
         uses: rjstone/discord-webhook-notify@v1
-        if: failure()
+        if: success()
         with:
           text: Failed deployment!
           severity: error
           description: Deployment to Render
-          details: Deployment failed
+          details: ${{ github.repository }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
 
