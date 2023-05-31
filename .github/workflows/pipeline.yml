@@ -28,6 +28,16 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
+
+      - name: Test Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+            severity: info
+            details: Test Succeeded!!
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+            avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
+
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
@@ -60,11 +70,10 @@ jobs:
           echo ${{ github.event_name }}          
           echo 'jore-start'      
           echo "Hello World!"
-          echo "Deployment done to https://pokedex-0ugg.onrender.com/"
-          echo ${ github.event_name }}..'      
-          echo ${{process.env.AS_COMMIT}}..'
-          echo ${{process.env.AS_AUTHOR}}..'
-          echo ${{process.env.AS_TOOK}}..'      
+          echo "Deployment done to https://pokedex-0ugg.onrender.com/"    
+          echo ${{process.env.AS_COMMIT}}
+          echo ${{process.env.AS_AUTHOR}}
+          echo ${{process.env.AS_TOOK}}     
           echo 'jore-end'   
 
   tag_release:
