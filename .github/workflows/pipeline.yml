@@ -67,7 +67,7 @@ jobs:
         with:
           text: Failed tests
           severity: error
-          description: Unit and E2E tests
+          description: ${{ github.event.commits[0].message }}
           details: ${{ github.event.commits.message }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
@@ -93,7 +93,7 @@ jobs:
         with:
           text: Failed deployment!
           severity: error
-          description: Deployment to Render
+          description: test... ${{ github.repository }} test...
           details: ${{ github.repository }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
