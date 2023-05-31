@@ -51,7 +51,7 @@ jobs:
           wait-on: http://localhost:5000
 
       - name: Tests succeeded
-        uses: rjstone/discord-webhook-notify@v1
+        uses: rjstone/discord-webhook-notify@v1.0.4
         if: success()
         with:
           text: Succesfull tests
@@ -62,7 +62,7 @@ jobs:
           avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
 
       - name: Tests failed
-        uses: rjstone/discord-webhook-notify@v1
+        uses: rjstone/discord-webhook-notify@v1.0.4
         if: failure()
         with:
           text: Failed tests
@@ -77,7 +77,7 @@ jobs:
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
 
       - name: Deployment succeeded
-        uses: rjstone/discord-webhook-notify@v1
+        uses: rjstone/discord-webhook-notify@v1.0.4
         if: success()
         with:
           text: New version deployed!
@@ -88,7 +88,7 @@ jobs:
           avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
 
       - name: Deployment failure
-        uses: rjstone/discord-webhook-notify@v1
+        uses: rjstone/discord-webhook-notify@v1.0.4
         if: failure()
         with:
           text: Failed deployment!
@@ -98,6 +98,16 @@ jobs:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
 
+      - name: Build cancel
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        if: cancelled()
+        with:
+          text: Build cancelled!
+          severity: warn
+          description: Test and deployment cancelled
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
+    
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
