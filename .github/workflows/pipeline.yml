@@ -67,7 +67,7 @@ jobs:
         with:
           text: Failed tests
           severity: error
-          description: commit '"'${{ github.event.commits[0].message }}'"'
+          description: commit '${{ github.event.commits[0].message }}'
           details: by ${{ github.event.commits[0].committer.username }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
