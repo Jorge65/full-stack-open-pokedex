@@ -43,25 +43,60 @@ jobs:
         run: npm run build
       - name: test
         run: npm run test
-      - name: Test Success
-        uses: rjstone/discord-webhook-notify@v1
-        if: success()
-        with:
-            severity: info
-            details: Test Succeeded!!!
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-            avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
-
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      
+
+      - name: Tests succeeded
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          text: Succesfull tests
+          severity: info
+          description: Unit and E2E tests
+          details: Tests succeeded !!!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
+
+      - name: Tests failed
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          text: Failed tests
+          severity: error
+          description: Unit and E2E tests
+          details: Tests failed before deployment
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
+    
       - name: Render deployment
         if: ${{ github.event_name == 'push' && !contains(toJson(join(github.event.commits.*.message)), '#skip') }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+
+      - name: Deployment succeeded
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          text: Succesfull deployment!
+          severity: info
+          description: Deployment to Render
+          details: Deployment was successfull
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
+
+      - name: Deployment failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          text: Failed deployment!
+          severity: error
+          description: Deployment to Render
+          details: Deployment failed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
 
   tag_release:
     needs: [simple_deployment_pipeline]
