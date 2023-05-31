@@ -61,10 +61,10 @@ jobs:
           echo 'jore-start'      
           echo "Hello World!"
           echo "Deployment done to https://pokedex-0ugg.onrender.com/"
-          echo '..${ github.event_name }..'      
-          echo '..${process.env.AS_COMMIT}..'
-          echo '..${process.env.AS_AUTHOR}..'
-          echo '..${process.env.AS_TOOK}..'      
+          echo ${ github.event_name }}..'      
+          echo ${{process.env.AS_COMMIT}}..'
+          echo ${{process.env.AS_AUTHOR}}..'
+          echo ${{process.env.AS_TOOK}}..'      
           echo 'jore-end'   
 
   tag_release:
