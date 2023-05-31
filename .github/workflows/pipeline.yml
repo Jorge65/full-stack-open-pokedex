@@ -63,7 +63,7 @@ jobs:
 
       - name: Tests failed
         uses: rjstone/discord-webhook-notify@v1
-        if: success()
+        if: failure()
         with:
           text: Failed tests
           severity: error
@@ -89,7 +89,7 @@ jobs:
 
       - name: Deployment failure
         uses: rjstone/discord-webhook-notify@v1
-        if: success()
+        if: failure()
         with:
           text: Failed deployment!
           severity: error
