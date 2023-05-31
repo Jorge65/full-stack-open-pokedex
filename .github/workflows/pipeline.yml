@@ -56,8 +56,8 @@ jobs:
         with:
           text: Succesfull tests
           severity: info
-          description: Unit and E2E tests
-          details: Tests succeeded!
+          description: commit message ${{ github.event.commits[0].message }}
+          details: by ${{ github.event.commits[0].committer.username }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
 
@@ -67,8 +67,8 @@ jobs:
         with:
           text: Failed tests
           severity: error
-          description: ${{ github.event.commits[0].message }}
-          details: ${{ github.event.commits.message }}
+          description: commit message ${{ github.event.commits[0].message }}
+          details: by ${{ github.event.commits[0].committer.username }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
     
@@ -83,7 +83,7 @@ jobs:
           text: New version deployed!
           severity: info
           description: Deployment to Render
-          details: https://pokedex-0ugg.onrender.com/ by Jorge65
+          details: to https://pokedex-0ugg.onrender.com/ by ${{ github.pusher.name }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
 
@@ -93,8 +93,8 @@ jobs:
         with:
           text: Failed deployment!
           severity: error
-          description: test... ${{ github.repository }} test...
-          details: ${{ github.repository }}
+          description: commit ${{ github.event.commits[0].id }} by ${{ github.event.commits[0].committer.username }} broke the build
+          details: commit message ${{ github.event.commits[0].message }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           avatarUrl: https://avatars.githubusercontent.com/u/37287618?s=400&u=e0fcf87ae4e084e50ddc9e9225a79cab0ff0d775&v=4
 
