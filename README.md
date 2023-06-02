@@ -1,16 +1,11 @@
 # Full Stack open CI/CD
 
-This repository is used for the CI/CD module of the Full stack open course
+This repository is used for the CI/CD module (11) of the Full stack open course
 
-Fork the repository to complete course exercises
-
-## Commands
-
-Start by running `npm install` inside the project folder
-
-`npm start` to run the webpack dev server
-`npm test` to run tests
-`npm run eslint` to run eslint
-`npm run build` to make a production build
-`npm run start-prod` to run your production build
-
+Excersices:
+- Exercise 11.1. exercise1.md in the root directory of this repo
+    https://github.com/Jorge65/full-stack-open-pokedex.git
+- Exercises 11.1.-11.19. This repo
+    https://github.com/Jorge65/full-stack-open-pokedex.git
+- Exercises 11.20.-11.21. separate repo:
+    https://github.com/Jorge65/Phonebook_CICD_Render.git
